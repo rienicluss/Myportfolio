@@ -149,6 +149,9 @@
             flex: 1;
             padding: 80px 100px;
             position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.9s ease 0.1s forwards;
         }
         
         /* Portfolio Header */
@@ -351,6 +354,243 @@
             width: 60px;
             height: 4px;
             background: var(--primary-yellow);
+        }
+
+        .view-more-btn {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 38px;
+            height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background: rgba(26, 26, 26, 0.9);
+            color: white;
+            font-size: 22px;
+            line-height: 1;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .view-more-btn:hover {
+            background: var(--dark);
+            transform: translateY(-2px);
+        }
+
+        .project-card[data-category="multimedia"] .project-image {
+            cursor: pointer;
+        }
+
+        .photo-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 250;
+        }
+
+        .photo-modal-overlay.show {
+            display: flex;
+        }
+
+        .photo-modal-content {
+            width: min(800px, 100%);
+            max-height: 90vh;
+            overflow: hidden;
+            background: white;
+            border-radius: 24px;
+            position: relative;
+            box-shadow: 0 40px 90px rgba(0,0,0,0.25);
+            opacity:0;
+            transform: translateY(15px) scale(0.98);
+        }
+
+        .photo-modal-overlay.show .photo-modal-content {
+            animation: modalPop 0.28s ease forwards;
+        }
+
+        @keyframes modalPop {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .photo-modal-img {
+            width: 100%;
+            display: block;
+            max-height: 60vh;
+            object-fit: contain;
+            background: var(--light-gray);
+        }
+
+        .photo-modal-caption {
+            padding: 20px 24px 28px;
+        }
+
+        .photo-modal-caption h4 {
+            margin-bottom: 12px;
+            font-size: 22px;
+            color: var(--dark);
+        }
+
+        .photo-modal-caption p {
+            margin: 0;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        .photo-modal-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 38px;
+            height: 38px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(26,26,26,0.9);
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .photo-modal-close:hover {
+            background: var(--dark);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 200;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            width: min(600px, 100%);
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            transform: translateY(15px) scale(0.98);
+        }
+
+        .modal-overlay.show .modal-content {
+            animation: modalPop 0.28s ease forwards;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 38px;
+            height: 38px;
+            border: none;
+            background: var(--dark);
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .modal-title {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .modal-label {
+            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--primary-yellow);
+            font-weight: 700;
+        }
+
+        .modal-details {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .modal-info {
+            margin-bottom: 20px;
+        }
+
+        .modal-info strong {
+            color: var(--dark);
+        }
+
+        .modal-link {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--primary-yellow);
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            transition: background 0.3s ease;
+        }
+
+        .modal-link:hover {
+            background: #e6c232;
+        }
+
+        .modal-features {
+            margin-bottom: 20px;
+            padding-left: 18px;
+            color: var(--text-gray);
+        }
+
+        .modal-features li {
+            margin-bottom: 8px;
+        }
+
+        .modal-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .modal-screenshot {
+            width: 100%;
+            border-radius: 18px;
+            object-fit: cover;
+            min-height: 160px;
+            background: var(--light-gray);
+        }
+
+        @media (max-width: 520px) {
+            .modal-gallery {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* No Results Message */
@@ -776,45 +1016,126 @@
             <!-- Filter Navigation -->
             <div class="filter-container">
                 <div class="filter-buttons">
-                    <button class="filter-btn active" data-filter="all">
-                        All Works<span class="filter-count"></span>
+                    <button class="filter-btn active" data-filter="websites">
+                        Websites<span class="filter-count"></span>
                     </button>
-                    <button class="filter-btn" data-filter="development">
-                        Development<span class="filter-count"></span>
+                    <button class="filter-btn" data-filter="multimedia">
+                        Multimedia<span class="filter-count"></span>
                     </button>
-                    <button class="filter-btn" data-filter="projects">
-                        Projects<span class="filter-count"></span>
-                    </button>
-                    <button class="filter-btn" data-filter="captures">
-                        Captures<span class="filter-count"></span>
-                    </button>
-                    <button class="filter-btn" data-filter="certificates">
-                        Certificates<span class="filter-count"></span>
+                    <button class="filter-btn" data-filter="major-projects">
+                        Major Projects<span class="filter-count"></span>
                     </button>
                 </div>
             </div>
             
-            <!-- Portfolio Grid 
+            <!-- Portfolio Grid -->
             <div class="portfolio-grid">
-            
-                <div class="project-card" data-category="development">
+                <div class="project-card" data-category="websites">
                     <div class="project-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" 
-                             alt="E-commerce Platform" 
+                        <img src="MyWorks/Websites/CoffeeUs/coffeeUs.jpg" 
+                             alt="CoffeeUs Cafe Website" 
                              class="project-image">
                     </div>
                     <div class="project-info">
-                        <span class="project-category">Development</span>
-                        <h3 class="project-title">E-commerce Platform</h3>
+                        <span class="project-category">Website</span>
+                        <h3 class="project-title">C.U - CoffeeUs Cafe</h3>
                         <p class="project-description">
-                            Modern online retail platform with responsive design and optimized user experience.
+                            A polished cafe website showcasing CoffeeUs menu, atmosphere, and contact details with a warm and inviting design.
                         </p>
                         <div class="project-accent"></div>
                     </div>
                 </div>
--->
+                <div class="project-card" data-category="websites">
+                    <div class="project-image-wrapper">
+                        <img src="MyWorks/Websites/Cent-Sible/Assets/title.jpeg" 
+                             alt="Cent-Sible Website" 
+                             class="project-image">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Website</span>
+                        <h3 class="project-title">Cent-Sible</h3>
+                        <p class="project-description">
+                            A modern website project that highlights a smart financial solution with clean layout and intuitive user flow.
+                        </p>
+                        <div class="project-accent"></div>
+                    </div>
+                </div>
+                <div class="project-card" data-category="multimedia" data-title="Social Media Visual" data-details="A branded promotional visual created as part of a multimedia campaign, designed for strong social media presence and audience engagement.">
+                    <div class="project-image-wrapper">
+                        <img src="MyWorks/Multimedia/2424816b-f94f-4b68-a151-7d2171b41dc5.jpg"
+                             alt="Social media multimedia work"
+                             class="project-image">
+                    </div>
+                </div>
+                <div class="project-card" data-category="multimedia" data-title="Brand Story Visual" data-details="A storytelling asset used to highlight brand messaging in multimedia campaigns, with carefully chosen imagery and layout.">
+                    <div class="project-image-wrapper">
+                        <img src="MyWorks/Multimedia/b87cde9b-8e46-4f77-a442-eb5fdc45d822.jpg"
+                             alt="Brand story multimedia work"
+                             class="project-image">
+                    </div>
+                </div>
+                <div class="project-card" data-category="multimedia" data-title="Concept Art Preview" data-details="A concept artwork piece showing visual exploration and creative direction used in client deliverables and presentations.">
+                    <div class="project-image-wrapper">
+                        <img src="MyWorks/Multimedia/MINI.png"
+                             alt="Concept art multimedia work"
+                             class="project-image">
+                    </div>
+                </div>
+                <div class="project-card" data-category="major-projects">
+                    <button class="view-more-btn"
+                        aria-label="View more about MyHakbang"
+                        data-title="MyHakbang"
+                        data-label="Capstone Project"
+                        data-details="MyHakbang is my capstone project, a full digital platform designed to support Patients with task assignment, progress tracking, and support service coordination. I led the development team to implement the architecture and core application workflows."
+                        data-features="User authentication;Task assignment dashboard;Progress tracking;Support service coordination;Responsive interface;AI chatbot integration and recommendation system"
+                        data-role="Lead Developer"
+                        data-link="https://myhakbang.site/"
+                        data-screenshot1="MyWorks/Projects/MyHakbang/Screenshots/landing.jpeg"
+                        data-screenshot2="MyWorks/Projects/MyHakbang/Screenshots/login.jpeg">
+                        ⋯
+                    </button>
+                    <div class="project-image-wrapper">
+                        <img src="MyWorks/Projects/MyHakbang/assets/Homepage-illustration.png" 
+                             alt="MyHakbang Capstone Project" 
+                             class="project-image">
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Major Project</span>
+                        <h3 class="project-title">MyHakbang</h3>
+                        <p class="project-description">
+                            Capstone project built as a complete digital platform for My Hakbang, focusing on intuitive navigation and seamless task and record management.
+                        </p>
+                        <div class="project-accent"></div>
+                    </div>
+                </div>
+            </div>
 
-                
+            <div class="modal-overlay" id="projectModal">
+                <div class="modal-content">
+                    <button class="modal-close" id="closeModal">&times;</button>
+                    <span class="modal-label" id="modalLabel"></span>
+                    <h3 class="modal-title" id="modalTitle"></h3>
+                    <p class="modal-details" id="modalDetails"></p>
+                    <ul class="modal-features" id="modalFeatures"></ul>
+                    <div class="modal-gallery">
+                        <img id="modalScreenshot1" class="modal-screenshot" src="" alt="MyHakbang screenshot 1">
+                        <img id="modalScreenshot2" class="modal-screenshot" src="" alt="MyHakbang screenshot 2">
+                    </div>
+                    <div class="modal-info"><strong>My Position on the Team:</strong> <span id="modalRole"></span></div>
+                    <a class="modal-link" href="#" target="_blank" id="modalWebsiteLink">Visit website</a>
+                </div>
+            </div>
+
+            <div class="photo-modal-overlay" id="photoModal">
+                <div class="photo-modal-content">
+                    <button class="photo-modal-close" id="closePhotoModal">&times;</button>
+                    <img id="photoModalImg" class="photo-modal-img" src="" alt="Multimedia preview">
+                    <div class="photo-modal-caption">
+                        <h4 id="photoModalTitle"></h4>
+                        <p id="photoModalDetails"></p>
+                    </div>
+                </div>
+            </div>
 
             <!-- No Results Message -->
             <div class="no-results">
@@ -826,46 +1147,122 @@
     </div>
     
     <script>
+        window.addEventListener('DOMContentLoaded', () => document.body.classList.add('ready'));
         // Filter functionality
         const filterButtons = document.querySelectorAll('.filter-btn');
         const projectCards = document.querySelectorAll('.project-card');
         const noResults = document.querySelector('.no-results');
+        const modalOverlay = document.getElementById('projectModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalLabel = document.getElementById('modalLabel');
+        const modalDetails = document.getElementById('modalDetails');
+        const modalFeatures = document.getElementById('modalFeatures');
+        const modalRole = document.getElementById('modalRole');
+        const modalWebsiteLink = document.getElementById('modalWebsiteLink');
+        const modalScreenshot1 = document.getElementById('modalScreenshot1');
+        const modalScreenshot2 = document.getElementById('modalScreenshot2');
+        const photoModalOverlay = document.getElementById('photoModal');
+        const photoModalImg = document.getElementById('photoModalImg');
+        const photoModalTitle = document.getElementById('photoModalTitle');
+        const photoModalDetails = document.getElementById('photoModalDetails');
 
-        filterButtons.forEach(button => {
+        document.querySelectorAll('.view-more-btn').forEach(button => {
             button.addEventListener('click', () => {
-                const filterValue = button.getAttribute('data-filter');
-                
-                // Update active button
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                
-                // Filter projects
-                let visibleCount = 0;
-                projectCards.forEach(card => {
-                    const category = card.getAttribute('data-category');
-                    
-                    if (filterValue === 'all' || category === filterValue) {
-                        card.classList.remove('hidden');
-                        visibleCount++;
-                    } else {
-                        card.classList.add('hidden');
-                    }
-                });
+                modalTitle.textContent = button.dataset.title;
+                modalLabel.textContent = button.dataset.label;
+                modalDetails.textContent = button.dataset.details;
+                modalRole.textContent = button.dataset.role;
+                modalWebsiteLink.href = button.dataset.link;
+                modalWebsiteLink.textContent = button.dataset.link;
 
-                // Show/hide no results message
-                if (visibleCount === 0) {
-                    noResults.classList.add('show');
+                const features = button.dataset.features ? button.dataset.features.split(';') : [];
+                modalFeatures.innerHTML = features.map(feature => `<li>${feature}</li>`).join('');
+
+                modalScreenshot1.src = button.dataset.screenshot1 || '';
+                modalScreenshot1.alt = `${button.dataset.title} screenshot 1`;
+                modalScreenshot2.src = button.dataset.screenshot2 || '';
+                modalScreenshot2.alt = `${button.dataset.title} screenshot 2`;
+
+                modalOverlay.classList.add('show');
+            });
+        });
+
+        document.querySelectorAll('.project-card[data-category="multimedia"] .project-image').forEach(img => {
+            img.addEventListener('click', () => {
+                const card = img.closest('.project-card');
+                const title = card.dataset.title || img.alt;
+                const details = card.dataset.details || 'Multimedia asset preview.';
+                photoModalImg.src = img.src;
+                photoModalImg.alt = title;
+                photoModalTitle.textContent = title;
+                photoModalDetails.textContent = details;
+                photoModalOverlay.classList.add('show');
+            });
+        });
+
+        document.getElementById('closeModal').addEventListener('click', () => {
+            modalOverlay.classList.remove('show');
+        });
+
+        document.getElementById('closePhotoModal').addEventListener('click', () => {
+            photoModalOverlay.classList.remove('show');
+        });
+
+        photoModalOverlay.addEventListener('click', event => {
+            if (event.target === photoModalOverlay) {
+                photoModalOverlay.classList.remove('show');
+            }
+        });
+
+        modalOverlay.addEventListener('click', event => {
+            if (event.target === modalOverlay) {
+                modalOverlay.classList.remove('show');
+            }
+        });
+
+        const applyFilter = (filterValue, scroll = true) => {
+            let visibleCount = 0;
+
+            projectCards.forEach(card => {
+                const category = card.getAttribute('data-category');
+
+                if (filterValue === 'all' || category === filterValue) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
                 } else {
-                    noResults.classList.remove('show');
+                    card.classList.add('hidden');
                 }
+            });
 
-                // Smooth scroll to grid
+            if (visibleCount === 0) {
+                noResults.classList.add('show');
+            } else {
+                noResults.classList.remove('show');
+            }
+
+            if (scroll) {
                 document.querySelector('.portfolio-grid').scrollIntoView({ 
                     behavior: 'smooth', 
                     block: 'nearest' 
                 });
+            }
+        };
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filterValue = button.getAttribute('data-filter');
+
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                applyFilter(filterValue);
             });
         });
+
+        const defaultFilter = document.querySelector('.filter-btn.active');
+        if (defaultFilter) {
+            applyFilter(defaultFilter.dataset.filter, false);
+        }
         
         // Navigation
         document.querySelectorAll('.nav-item a').forEach(link => {

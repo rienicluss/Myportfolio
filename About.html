@@ -26,16 +26,44 @@
 
 body{
     font-family:'DM Sans',sans-serif;
-    background:var(--light-gray);
+    background:var(--light-gray);    opacity:0;
+    transition:opacity 0.7s ease;
 }
+
+body.ready {
+    opacity:1;}
 
 /* Layout */
 .container{
     display:flex;
     min-height:100vh;
+    opacity:0;
+    transform: translateY(18px);
+    animation: fadeInUp 0.9s ease 0.15s forwards;
 }
 
-/* Sidebar */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 .sidebar{
     width:220px;
     background:white;
@@ -133,6 +161,9 @@ body{
     font-size:60px;
     font-weight:700;
     margin-bottom:20px;
+    opacity:0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease 0.2s forwards;
 }
 
 .title-divider{
@@ -145,6 +176,9 @@ body{
 .about-text{
     max-width:700px;
     margin-bottom:60px;
+    opacity:0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease 0.3s forwards;
 }
 
 .about-text p{
@@ -172,28 +206,156 @@ body{
 }
 
 .skills-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    display:block;
     gap:30px;
 }
 
-.skill-card{
+.skill-info{
     background:white;
     padding:30px;
-    transition:0.3s;
-    font-size:15px;
-    line-height:1.6;
+    border-radius:18px;
+    margin-bottom:24px;
+    line-height:1.8;
+    opacity:0;
+    transform: translateY(24px);
+    animation: fadeInUp 0.8s ease forwards;
 }
 
-.skill-card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 10px 20px rgba(0,0,0,0.1);
+.skills-grid .skill-info:nth-child(1){
+    animation-delay: 0.25s;
 }
 
-.skill-name{
+.skills-grid .skill-info:nth-child(2){
+    animation-delay: 0.35s;
+}
+
+.skills-grid .skill-info:nth-child(3){
+    animation-delay: 0.45s;
+}
+
+.skills-grid .skill-info:nth-child(4){
+    animation-delay: 0.55s;
+}
+
+.skill-info h3{
+    font-size:22px;
+    margin-bottom:14px;
     font-weight:700;
+    color:var(--dark);
+}
+
+.skill-info p{
+    margin:0;
+    color:var(--text-gray);
+    font-size:16px;
+}
+
+.skill-info ul{
+    margin:14px 0 0;
+    padding-left:18px;
+    color:#444;
+}
+
+.skill-info li{
     margin-bottom:10px;
-    font-size:18px;
+}
+
+.icon-bar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:18px;
+    justify-content:center;
+}
+
+.icon-item{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:70px;
+    height:70px;
+    border-radius:14px;
+    background:white;
+    border:1px solid var(--border);
+    overflow:hidden;
+    transition:0.3s;
+}
+
+.icon-item:hover{
+    transform:scale(1.05);
+}
+
+.icon-item img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+
+.icon-item i{
+    line-height:1;
+}
+
+/* HTML */
+.html-logo{
+    background:#E34C26;
+}
+
+/* CSS */
+.css-logo{
+    background:#563D7C;
+}
+
+/* JavaScript */
+.js-logo{
+    background:#F7DF1E;
+    color:#000;
+}
+
+/* React */
+.react-logo{
+    background:#61DAFB;
+    color:#000;
+}
+
+/* MySQL */
+.mysql-logo{
+    background:#00758F;
+}
+
+/* PHP */
+.php-logo{
+    background:#777BB4;
+}
+
+/* Java */
+.java-logo{
+    background:#007396;
+}
+
+/* C# */
+.csharp-logo{
+    background:#239120;
+}
+
+/* Python */
+.python-logo{
+    background:linear-gradient(135deg, #3776AB 0%, #FFD43B 100%);
+    color:#000;
+}
+
+/* Database */
+.database-logo{
+    background:#336791;
+}
+
+/* Cisco */
+.cisco-logo{
+    background:#1BA0D7;
+}
+
+/* Networking */
+.network-logo{
+    background:#FF6B35;
 }
 
 /* ================= TABLET (768px) ================= */
@@ -501,11 +663,11 @@ body{
 
     <div class="about-text">
         <p>
-            I'm Rodolfo Bien Aboc, an aspiring Network Specialist and Web UI/UX Developer passionate about building clean, functional, and visually engaging digital experiences.
+            I'm <strong>Rodolfo Bien Aboc</strong>, a <strong>Network Specialist</strong> and <strong>Web UI/UX Developer</strong> with hands-on experience in building networks and creating web applications. I enjoy working on projects that combine network infrastructure with user-friendly digital interfaces.
         </p>
 
         <p>
-            My focus is on combining technical networking knowledge with modern web development to create systems that are both reliable and user-centered.
+            I have practical experience with network design, web development, and system troubleshooting. I'm also fluent in using Canva for making presentations and designs. I'm always learning and exploring new technologies to improve my skills and deliver better solutions.
         </p>
 
         <div class="highlight-box">
@@ -517,24 +679,42 @@ body{
         <h2>What I Do</h2>
 
         <div class="skills-grid">
-            <div class="skill-card">
-                <div class="skill-name">Network Configuration</div>
-                Designing and managing secure and efficient network systems.
+            <div class="skill-info">
+                <h3>UI / UX Development</h3>
+                <p>I build responsive and user-friendly interfaces using HTML, CSS, JavaScript, and React. I also work with backend integration tools like MySQL, PHP, and XAMPP to connect visual designs with functional applications.</p>
+                <div class="icon-bar">
+                    <span class="icon-item"><img src="Icons/icons8-html-5-100.png" alt="HTML"></span>
+                    <span class="icon-item"><img src="Icons/icons8-css-filetype-100.png" alt="CSS"></span>
+                    <span class="icon-item"><img src="Icons/icons8-javascript-100.png" alt="JavaScript"></span>
+                    <span class="icon-item"><img src="Icons/icons8-react-100.png" alt="React"></span>
+                    <span class="icon-item"><img src="Icons/icons8-php-logo-100.png" alt="PHP"></span>
+                </div>
             </div>
 
-            <div class="skill-card">
-                <div class="skill-name">Web Development</div>
-                Creating responsive websites using HTML, CSS, and JavaScript.
+            <div class="skill-info">
+                <h3>Design & Presentation</h3>
+                <p>I'm fluent in Canva for making polished presentations, social graphics, and design assets. I create visual layouts that communicate ideas clearly and support strong storytelling.</p>
+                <div class="icon-bar">
+                    <span class="icon-item"><img src="Icons/icons8-canva-100.png" alt="Canva"></span>
+                </div>
             </div>
 
-            <div class="skill-card">
-                <div class="skill-name">UI/UX Design</div>
-                Crafting intuitive user interfaces focused on usability.
+            <div class="skill-info">
+                <h3>Networking</h3>
+                <p>I design and simulate network topologies with Cisco Packet Tracer and work with switches, routers, cabling, and connectivity setup. I enjoy combining physical networking with practical troubleshooting.</p>
+                <div class="icon-bar">
+                    <span class="icon-item"><img src="Icons/icons8-html-5-100.png" alt="Networks"></span>
+                </div>
             </div>
 
-            <div class="skill-card">
-                <div class="skill-name">System Troubleshooting</div>
-                Diagnosing and solving hardware and software issues efficiently.
+            <div class="skill-info">
+                <h3>Programming Languages</h3>
+                <p>I have basic to intermediate experience with Java, C#, C, and Python, and I apply object-oriented programming principles to develop structured solutions and algorithms.</p>
+                <div class="icon-bar">
+                    <span class="icon-item"><img src="Icons/icons8-java-100.png" alt="Java"></span>
+                    <span class="icon-item"><img src="Icons/icons8-c-sharp-logo-100.png" alt="C#"></span>
+                    <span class="icon-item"><img src="Icons/icons8-python-100.png" alt="Python"></span>
+                </div>
             </div>
         </div>
     </section>
@@ -543,6 +723,7 @@ body{
 </div>
 
 <script>
+window.addEventListener('DOMContentLoaded', () => document.body.classList.add('ready'));
 // Allow real page navigation
 document.querySelectorAll('.nav-item a').forEach(link=>{
     link.addEventListener('click',function(e){
