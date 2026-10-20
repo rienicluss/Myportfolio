@@ -7,999 +7,27 @@
     <link rel="icon" href="myLogo.png" type="image/jpeg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700;900&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --primary-yellow: #FFD33D;
-            --dark: #1a1a1a;
-            --light-gray: #f5f5f5;
-            --text-gray: #666;
-            --border: #e0e0e0;
-        }
-        
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--light-gray);
-            overflow-x: hidden;
-        }
-        
-        .container {
-            display: flex;
-            min-height: 100vh;
-        }
-        
-        /* Sidebar Navigation */
-        .sidebar {
-            width: 220px;
-            background: white;
-            padding: 40px 0;
-            position: fixed;
-            height: 100vh;
-            border-right: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            z-index: 100;
-        }
-        
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-align: center;
-            margin-bottom: 60px;
-            color: var(--dark);
-            text-transform: uppercase;
-        }
-        
-        .nav-menu {
-            list-style: none;
-            flex: 1;
-        }
-        
-        .nav-item {
-            position: relative;
-            margin-bottom: 5px;
-        }
-        
-        .nav-item a {
-            display: block;
-            padding: 16px 40px;
-            color: var(--dark);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .nav-item a::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 4px;
-            background: var(--primary-yellow);
-            transform: scaleY(0);
-            transition: transform 0.3s ease;
-        }
-        
-        .nav-item a:hover::before,
-        .nav-item.active a::before {
-            transform: scaleY(1);
-        }
-        
-        .nav-item.active a {
-            background: var(--primary-yellow);
-            font-weight: 700;
-        }
-        
-        .nav-item a:hover {
-            background: rgba(255, 211, 61, 0.2);
-            padding-left: 45px;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: auto;
-            padding: 30px 0;
-        }
-        
-        .social-links a {
-            width: 36px;
-            height: 36px;
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: var(--dark);
-            transition: all 0.3s ease;
-            font-size: 14px;
-        }
-        
-        .social-links a:hover {
-            background: var(--primary-yellow);
-            border-color: var(--primary-yellow);
-            transform: translateY(-3px);
-        }
-        
-        .copyright {
-            text-align: center;
-            font-size: 10px;
-            color: var(--text-gray);
-            letter-spacing: 1px;
-        }
-        
-        /* Main Content Area */
-        .main-content {
-            margin-left: 220px;
-            flex: 1;
-            padding: 80px 100px;
-            position: relative;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.9s ease 0.1s forwards;
-        }
-        
-        /* Portfolio Header */
-        .portfolio-header {
-            margin-bottom: 50px;
-            animation: fadeInUp 0.8s ease;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .portfolio-title {
-            font-size: 64px;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 20px;
-            letter-spacing: -2px;
-            line-height: 1;
-        }
-        
-        .title-divider {
-            width: 120px;
-            height: 5px;
-            background: var(--primary-yellow);
-            margin-bottom: 30px;
-        }
-        
-        .portfolio-subtitle {
-            font-size: 18px;
-            color: var(--text-gray);
-            max-width: 600px;
-            line-height: 1.6;
-        }
-
-        /* Filter Navigation */
-        .filter-container {
-            margin-bottom: 50px;
-            animation: fadeInUp 0.8s ease 0.2s backwards;
-        }
-
-        .filter-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .filter-btn {
-            padding: 12px 30px;
-            background: white;
-            border: 2px solid var(--border);
-            color: var(--dark);
-            font-family: 'DM Sans', sans-serif;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .filter-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--primary-yellow);
-            transition: left 0.3s ease;
-            z-index: -1;
-        }
-
-        .filter-btn:hover::before,
-        .filter-btn.active::before {
-            left: 0;
-        }
-
-        .filter-btn.active {
-            border-color: var(--primary-yellow);
-            color: var(--dark);
-            font-weight: 700;
-        }
-
-        .filter-btn:hover {
-            border-color: var(--primary-yellow);
-            transform: translateY(-2px);
-        }
-
-        .filter-count {
-            display: inline-block;
-            margin-left: 8px;
-            padding: 2px 8px;
-            background: var(--light-gray);
-            border-radius: 10px;
-            font-size: 11px;
-            font-weight: 700;
-        }
-
-        .filter-btn.active .filter-count {
-            background: rgba(26, 26, 26, 0.1);
-        }
-        
-        /* Portfolio Grid */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 40px;
-            margin-bottom: 80px;
-        }
-        
-        .project-card {
-            background: white;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-            position: relative;
-            animation: fadeInUp 0.6s ease backwards;
-        }
-
-        .project-card.hidden {
-            display: none;
-        }
-        
-        .project-card:nth-child(1) { animation-delay: 0.3s; }
-        .project-card:nth-child(2) { animation-delay: 0.35s; }
-        .project-card:nth-child(3) { animation-delay: 0.4s; }
-        .project-card:nth-child(4) { animation-delay: 0.45s; }
-        .project-card:nth-child(5) { animation-delay: 0.5s; }
-        .project-card:nth-child(6) { animation-delay: 0.55s; }
-        .project-card:nth-child(7) { animation-delay: 0.6s; }
-        .project-card:nth-child(8) { animation-delay: 0.65s; }
-        
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-        
-        .project-image-wrapper {
-            position: relative;
-            height: 280px;
-            overflow: hidden;
-            background: var(--light-gray);
-        }
-        
-        .project-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .project-card:hover .project-image {
-            transform: scale(1.05);
-        }
-        
-        .project-info {
-            padding: 30px;
-            position: relative;
-        }
-        
-        .project-category {
-            display: inline-block;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--text-gray);
-            margin-bottom: 12px;
-        }
-        
-        .project-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 12px;
-            line-height: 1.3;
-        }
-        
-        .project-description {
-            font-size: 15px;
-            line-height: 1.6;
-            color: var(--text-gray);
-        }
-        
-        .project-accent {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: var(--primary-yellow);
-        }
-
-        .view-more-btn {
-            position: absolute;
-            top: 18px;
-            right: 18px;
-            width: 38px;
-            height: 38px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border: none;
-            background: rgba(26, 26, 26, 0.9);
-            color: white;
-            font-size: 22px;
-            line-height: 1;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.3s ease;
-            border-radius: 50%;
-            z-index: 2;
-        }
-
-        .view-more-btn:hover {
-            background: var(--dark);
-            transform: translateY(-2px);
-        }
-
-        .project-card[data-category="multimedia"] .project-image {
-            cursor: pointer;
-        }
-
-        .photo-modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.75);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            z-index: 250;
-        }
-
-        .photo-modal-overlay.show {
-            display: flex;
-        }
-
-        .photo-modal-content {
-            width: min(800px, 100%);
-            max-height: 90vh;
-            overflow: hidden;
-            background: white;
-            border-radius: 24px;
-            position: relative;
-            box-shadow: 0 40px 90px rgba(0,0,0,0.25);
-            opacity:0;
-            transform: translateY(15px) scale(0.98);
-        }
-
-        .photo-modal-overlay.show .photo-modal-content {
-            animation: modalPop 0.28s ease forwards;
-        }
-
-        @keyframes modalPop {
-            from {
-                opacity: 0;
-                transform: translateY(20px) scale(0.96);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .photo-modal-img {
-            width: 100%;
-            display: block;
-            max-height: 60vh;
-            object-fit: contain;
-            background: var(--light-gray);
-        }
-
-        .photo-modal-caption {
-            padding: 20px 24px 28px;
-        }
-
-        .photo-modal-caption h4 {
-            margin-bottom: 12px;
-            font-size: 22px;
-            color: var(--dark);
-        }
-
-        .photo-modal-caption p {
-            margin: 0;
-            color: var(--text-gray);
-            line-height: 1.8;
-        }
-
-        .photo-modal-close {
-            position: absolute;
-            top: 14px;
-            right: 14px;
-            width: 38px;
-            height: 38px;
-            border: none;
-            border-radius: 50%;
-            background: rgba(26,26,26,0.9);
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            z-index: 2;
-        }
-
-        .photo-modal-close:hover {
-            background: var(--dark);
-        }
-
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.6);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            z-index: 200;
-        }
-
-        .modal-overlay.show {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            width: min(600px, 100%);
-            max-height: 90vh;
-            overflow-y: auto;
-            border-radius: 20px;
-            padding: 30px;
-            position: relative;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
-            opacity: 0;
-            transform: translateY(15px) scale(0.98);
-        }
-
-        .modal-overlay.show .modal-content {
-            animation: modalPop 0.28s ease forwards;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 18px;
-            right: 18px;
-            width: 38px;
-            height: 38px;
-            border: none;
-            background: var(--dark);
-            color: white;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 18px;
-            line-height: 1;
-        }
-
-        .modal-title {
-            font-size: 28px;
-            margin-bottom: 10px;
-            color: var(--dark);
-        }
-
-        .modal-label {
-            display: inline-block;
-            margin-bottom: 20px;
-            font-size: 12px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--primary-yellow);
-            font-weight: 700;
-        }
-
-        .modal-details {
-            color: var(--text-gray);
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        .modal-info {
-            margin-bottom: 20px;
-        }
-
-        .modal-info strong {
-            color: var(--dark);
-        }
-
-        .modal-link {
-            display: inline-block;
-            padding: 12px 24px;
-            background: var(--primary-yellow);
-            color: var(--dark);
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 700;
-            transition: background 0.3s ease;
-        }
-
-        .modal-link:hover {
-            background: #e6c232;
-        }
-
-        .modal-features {
-            margin-bottom: 20px;
-            padding-left: 18px;
-            color: var(--text-gray);
-        }
-
-        .modal-features li {
-            margin-bottom: 8px;
-        }
-
-        .modal-gallery {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .modal-screenshot {
-            width: 100%;
-            border-radius: 18px;
-            object-fit: cover;
-            min-height: 160px;
-            background: var(--light-gray);
-        }
-
-        @media (max-width: 520px) {
-            .modal-gallery {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* No Results Message */
-        .no-results {
-            text-align: center;
-            padding: 80px 20px;
-            display: none;
-        }
-
-        .no-results.show {
-            display: block;
-        }
-
-        .no-results-icon {
-            font-size: 64px;
-            color: var(--border);
-            margin-bottom: 20px;
-        }
-
-        .no-results-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 10px;
-        }
-
-        .no-results-text {
-            font-size: 16px;
-            color: var(--text-gray);
-        }
-        
-        /* ================= TABLET (768px) ================= */
-        
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-            
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-                padding: 25px 0;
-                border-right: none;
-                border-bottom: 1px solid var(--border);
-            }
-            
-            .logo {
-                font-size: 24px;
-                margin-bottom: 25px;
-                letter-spacing: 2px;
-            }
-            
-            .nav-menu {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 5px;
-            }
-            
-            .nav-item {
-                margin-bottom: 0;
-            }
-            
-            .nav-item a {
-                padding: 12px 20px;
-                font-size: 13px;
-            }
-
-            .nav-item a:hover{
-                padding-left:20px;
-            }
-            
-            .social-links {
-                padding: 20px 0 15px;
-                gap: 12px;
-            }
-            
-            .social-links a {
-                width: 34px;
-                height: 34px;
-                font-size: 13px;
-            }
-            
-            .copyright {
-                font-size: 9px;
-            }
-            
-            .main-content {
-                margin-left: 0;
-                padding: 50px 35px;
-            }
-            
-            .portfolio-header {
-                margin-bottom: 40px;
-            }
-            
-            .portfolio-title {
-                font-size: 48px;
-                letter-spacing: -1px;
-            }
-            
-            .title-divider {
-                width: 100px;
-                height: 4px;
-                margin-bottom: 25px;
-            }
-            
-            .portfolio-subtitle {
-                font-size: 16px;
-            }
-
-            .filter-container {
-                margin-bottom: 40px;
-            }
-
-            .filter-buttons {
-                gap: 10px;
-            }
-
-            .filter-btn {
-                padding: 10px 20px;
-                font-size: 12px;
-            }
-
-            .filter-count {
-                font-size: 10px;
-                padding: 2px 6px;
-            }
-            
-            .portfolio-grid {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-                gap: 30px;
-                margin-bottom: 60px;
-            }
-            
-            .project-image-wrapper {
-                height: 240px;
-            }
-            
-            .project-info {
-                padding: 25px;
-            }
-            
-            .project-category {
-                font-size: 10px;
-                margin-bottom: 10px;
-            }
-            
-            .project-title {
-                font-size: 20px;
-                margin-bottom: 10px;
-            }
-            
-            .project-description {
-                font-size: 14px;
-            }
-
-            .no-results {
-                padding: 60px 20px;
-            }
-
-            .no-results-icon {
-                font-size: 48px;
-            }
-
-            .no-results-title {
-                font-size: 20px;
-            }
-
-            .no-results-text {
-                font-size: 14px;
-            }
-        }
-        
-        /* ================= MOBILE (480px) ================= */
-        
-        @media (max-width: 480px) {
-            .sidebar {
-                padding: 20px 0;
-            }
-            
-            .logo {
-                font-size: 20px;
-                margin-bottom: 20px;
-                letter-spacing: 1.5px;
-            }
-            
-            .nav-menu {
-                gap: 3px;
-            }
-            
-            .nav-item a {
-                padding: 10px 15px;
-                font-size: 11px;
-                letter-spacing: 0.5px;
-            }
-            
-            .social-links {
-                padding: 15px 0 12px;
-                gap: 10px;
-            }
-            
-            .social-links a {
-                width: 32px;
-                height: 32px;
-                font-size: 12px;
-            }
-            
-            .copyright {
-                font-size: 8px;
-                padding: 0 10px;
-            }
-            
-            .main-content {
-                padding: 35px 20px;
-            }
-            
-            .portfolio-header {
-                margin-bottom: 30px;
-            }
-            
-            .portfolio-title {
-                font-size: 36px;
-                margin-bottom: 15px;
-            }
-            
-            .title-divider {
-                width: 80px;
-                height: 4px;
-                margin-bottom: 20px;
-            }
-            
-            .portfolio-subtitle {
-                font-size: 14px;
-                line-height: 1.5;
-            }
-
-            .filter-container {
-                margin-bottom: 30px;
-            }
-
-            .filter-buttons {
-                gap: 8px;
-            }
-
-            .filter-btn {
-                padding: 8px 16px;
-                font-size: 11px;
-                letter-spacing: 0.5px;
-            }
-
-            .filter-count {
-                font-size: 9px;
-                padding: 1px 5px;
-                margin-left: 5px;
-            }
-            
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-                margin-bottom: 50px;
-            }
-            
-            .project-image-wrapper {
-                height: 200px;
-            }
-            
-            .project-info {
-                padding: 20px;
-            }
-            
-            .project-category {
-                font-size: 9px;
-                letter-spacing: 1px;
-                margin-bottom: 8px;
-            }
-            
-            .project-title {
-                font-size: 18px;
-                margin-bottom: 8px;
-            }
-            
-            .project-description {
-                font-size: 13px;
-                line-height: 1.5;
-            }
-            
-            .project-accent {
-                width: 50px;
-                height: 3px;
-            }
-
-            .no-results {
-                padding: 50px 15px;
-            }
-
-            .no-results-icon {
-                font-size: 40px;
-            }
-
-            .no-results-title {
-                font-size: 18px;
-            }
-
-            .no-results-text {
-                font-size: 13px;
-            }
-        }
-        
-        /* ================= EXTRA SMALL PHONES (360px and below) ================= */
-        
-        @media (max-width: 360px) {
-            .logo {
-                font-size: 18px;
-            }
-            
-            .nav-item a {
-                padding: 8px 12px;
-                font-size: 10px;
-            }
-            
-            .main-content {
-                padding: 30px 15px;
-            }
-            
-            .portfolio-title {
-                font-size: 32px;
-            }
-            
-            .title-divider {
-                width: 70px;
-            }
-            
-            .portfolio-subtitle {
-                font-size: 13px;
-            }
-
-            .filter-btn {
-                padding: 7px 14px;
-                font-size: 10px;
-            }
-            
-            .project-image-wrapper {
-                height: 180px;
-            }
-            
-            .project-info {
-                padding: 18px;
-            }
-            
-            .project-title {
-                font-size: 17px;
-            }
-            
-            .project-description {
-                font-size: 12px;
-            }
-        }
-    </style>
+<link rel="stylesheet" href="css/works.css">
 </head>
 <body>
     <div class="container">
         <!-- Sidebar Navigation -->
         <aside class="sidebar">
-            <div class="logo">Benifold's</div>
-            
             <ul class="nav-menu">
                 <li class="nav-item">
                     <a href="index.html">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="About.html">About Me</a>
+                    <a href="About.html">About</a>
                 </li>
                 <li class="nav-item active">
-                    <a href="works.html">Works</a>
+                    <a href="works.html" aria-current="page">Projects</a>
                 </li>
                 
                 <li class="nav-item">
-                    <a href="contact.html">Contact</a>
+                    <a href="contact.html">Contacts</a>
                 </li>
             </ul>
-            
-            <div class="social-links">
-                <a href="https://instagram.com/yourusername" 
-                   target="_blank" 
-                   rel="noopener noreferrer" 
-                   aria-label="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-
-                <a href="https://www.facebook.com/rodolfo.aboc/" 
-                   target="_blank" 
-                   rel="noopener noreferrer" 
-                   aria-label="Facebook">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-
-                <a href="https://github.com/rienicluss" 
-                   target="_blank" 
-                   rel="noopener noreferrer" 
-                   aria-label="GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
-            </div>
-            
-            <div class="copyright">
-                © 2025 BeniFold's
-            </div>
         </aside>
         
         <!-- Main Content -->
@@ -1016,7 +44,10 @@
             <!-- Filter Navigation -->
             <div class="filter-container">
                 <div class="filter-buttons">
-                    <button class="filter-btn active" data-filter="websites">
+                    <button class="filter-btn active" data-filter="all">
+                        All<span class="filter-count"></span>
+                    </button>
+                    <button class="filter-btn" data-filter="websites">
                         Websites<span class="filter-count"></span>
                     </button>
                     <button class="filter-btn" data-filter="multimedia">
@@ -1029,7 +60,7 @@
             </div>
             
             <!-- Portfolio Grid -->
-            <div class="portfolio-grid">
+            <div class="portfolio-grid" role="region" aria-label="Featured projects" aria-live="polite">
                 <div class="project-card" data-category="websites">
                     <div class="project-image-wrapper">
                         <img src="MyWorks/Websites/CoffeeUs/coffeeUs.jpg" 
@@ -1047,15 +78,15 @@
                 </div>
                 <div class="project-card" data-category="websites">
                     <div class="project-image-wrapper">
-                        <img src="MyWorks/Websites/Cent-Sible/Assets/title.jpeg" 
-                             alt="Cent-Sible Website" 
+                        <img src="MyWorks/Websites/SurveyApp/583016392_866552129064024_677551929558448949_n.png"
+                             alt="Customer satisfaction survey registration screen"
                              class="project-image">
                     </div>
                     <div class="project-info">
                         <span class="project-category">Website</span>
-                        <h3 class="project-title">Cent-Sible</h3>
+                        <h3 class="project-title">Customer Satisfaction Survey</h3>
                         <p class="project-description">
-                            A modern website project that highlights a smart financial solution with clean layout and intuitive user flow.
+                            A survey web app for creating and sharing customer satisfaction surveys.
                         </p>
                         <div class="project-accent"></div>
                     </div>
@@ -1109,20 +140,32 @@
                     </div>
                 </div>
             </div>
+            <div class="carousel-controls" aria-label="Project carousel controls">
+                <button class="carousel-arrow" type="button" data-direction="-1" aria-label="Previous project">
+                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                </button>
+                <span class="carousel-status" aria-live="polite"></span>
+                <button class="carousel-arrow" type="button" data-direction="1" aria-label="Next project">
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </button>
+            </div>
 
             <div class="modal-overlay" id="projectModal">
                 <div class="modal-content">
                     <button class="modal-close" id="closeModal">&times;</button>
-                    <span class="modal-label" id="modalLabel"></span>
-                    <h3 class="modal-title" id="modalTitle"></h3>
-                    <p class="modal-details" id="modalDetails"></p>
-                    <ul class="modal-features" id="modalFeatures"></ul>
-                    <div class="modal-gallery">
-                        <img id="modalScreenshot1" class="modal-screenshot" src="" alt="MyHakbang screenshot 1">
-                        <img id="modalScreenshot2" class="modal-screenshot" src="" alt="MyHakbang screenshot 2">
+                    <img id="modalProjectImage" class="modal-project-image" src="" alt="">
+                    <div class="modal-body">
+                        <span class="modal-label" id="modalLabel"></span>
+                        <h3 class="modal-title" id="modalTitle"></h3>
+                        <p class="modal-details" id="modalDetails"></p>
+                        <ul class="modal-features" id="modalFeatures"></ul>
+                        <div class="modal-gallery">
+                            <img id="modalScreenshot1" class="modal-screenshot" src="" alt="MyHakbang screenshot 1">
+                            <img id="modalScreenshot2" class="modal-screenshot" src="" alt="MyHakbang screenshot 2">
+                        </div>
+                        <div class="modal-info"><strong>My Position on the Team:</strong> <span id="modalRole"></span></div>
+                        <a class="modal-link" href="#" target="_blank" rel="noopener noreferrer" id="modalWebsiteLink">Visit website</a>
                     </div>
-                    <div class="modal-info"><strong>My Position on the Team:</strong> <span id="modalRole"></span></div>
-                    <a class="modal-link" href="#" target="_blank" id="modalWebsiteLink">Visit website</a>
                 </div>
             </div>
 
@@ -1161,28 +204,147 @@
         const modalWebsiteLink = document.getElementById('modalWebsiteLink');
         const modalScreenshot1 = document.getElementById('modalScreenshot1');
         const modalScreenshot2 = document.getElementById('modalScreenshot2');
+        const modalGallery = document.querySelector('.modal-gallery');
+        const modalInfo = document.querySelector('.modal-info');
+        const modalProjectImage = document.getElementById('modalProjectImage');
         const photoModalOverlay = document.getElementById('photoModal');
         const photoModalImg = document.getElementById('photoModalImg');
         const photoModalTitle = document.getElementById('photoModalTitle');
         const photoModalDetails = document.getElementById('photoModalDetails');
+        const carouselStatus = document.querySelector('.carousel-status');
+        let activeCarouselIndex = 0;
+        const carouselPositionClasses = [
+            'carousel-active',
+            'carousel-prev',
+            'carousel-next',
+            'carousel-far-prev',
+            'carousel-far-next',
+            'carousel-offstage'
+        ];
 
-        document.querySelectorAll('.view-more-btn').forEach(button => {
+        projectCards.forEach(card => {
+            const image = card.querySelector('.project-image');
+            const title = card.querySelector('.project-title')?.textContent.trim() || card.dataset.title || image.alt;
+            const category = card.querySelector('.project-category')?.textContent.trim()
+                || card.dataset.category.replace('-', ' ');
+            const caption = document.createElement('div');
+            caption.className = 'carousel-caption';
+            caption.innerHTML = `<span>${category}</span><h2>${title}</h2>`;
+            card.append(caption);
+        });
+
+        const updateCarousel = () => {
+            const visibleCards = [...projectCards].filter(card => !card.classList.contains('hidden'));
+
+            projectCards.forEach(card => {
+                card.classList.remove(...carouselPositionClasses);
+                card.setAttribute('aria-hidden', 'true');
+            });
+
+            visibleCards.forEach((card, index) => {
+                let distance = index - activeCarouselIndex;
+                if (distance > visibleCards.length / 2) distance -= visibleCards.length;
+                if (distance < -visibleCards.length / 2) distance += visibleCards.length;
+
+                const position = {
+                    0: 'carousel-active',
+                    1: 'carousel-next',
+                    '-1': 'carousel-prev',
+                    2: 'carousel-far-next',
+                    '-2': 'carousel-far-prev'
+                }[distance] || 'carousel-offstage';
+                card.classList.add(position);
+                card.setAttribute('aria-hidden', position === 'carousel-offstage' ? 'true' : 'false');
+                const detailsButton = card.querySelector('.view-more-btn');
+                if (detailsButton) detailsButton.tabIndex = position === 'carousel-offstage' ? -1 : 0;
+            });
+
+            carouselStatus.textContent = visibleCards.length
+                ? `${activeCarouselIndex + 1} / ${visibleCards.length}`
+                : '0 / 0';
+
+            const activeImage = visibleCards[activeCarouselIndex]?.querySelector('.project-image');
+            if (activeImage?.src) {
+                document.querySelector('.main-content').style.setProperty(
+                    '--carousel-photo',
+                    `url("${activeImage.src}")`
+                );
+            } else {
+                document.querySelector('.main-content').style.removeProperty('--carousel-photo');
+            }
+        };
+
+        document.querySelectorAll('.carousel-arrow').forEach(button => {
             button.addEventListener('click', () => {
-                modalTitle.textContent = button.dataset.title;
-                modalLabel.textContent = button.dataset.label;
-                modalDetails.textContent = button.dataset.details;
-                modalRole.textContent = button.dataset.role;
-                modalWebsiteLink.href = button.dataset.link;
-                modalWebsiteLink.textContent = button.dataset.link;
+                const visibleCount = [...projectCards].filter(card => !card.classList.contains('hidden')).length;
+                if (!visibleCount) return;
+                activeCarouselIndex = (activeCarouselIndex + Number(button.dataset.direction) + visibleCount) % visibleCount;
+                updateCarousel();
+            });
+        });
 
-                const features = button.dataset.features ? button.dataset.features.split(';') : [];
-                modalFeatures.innerHTML = features.map(feature => `<li>${feature}</li>`).join('');
+        filterButtons.forEach(button => {
+            const count = [...projectCards].filter(card =>
+                button.dataset.filter === 'all' || card.dataset.category === button.dataset.filter
+            ).length;
+            button.querySelector('.filter-count').textContent = count;
+        });
 
-                modalScreenshot1.src = button.dataset.screenshot1 || '';
-                modalScreenshot1.alt = `${button.dataset.title} screenshot 1`;
-                modalScreenshot2.src = button.dataset.screenshot2 || '';
-                modalScreenshot2.alt = `${button.dataset.title} screenshot 2`;
+        projectCards.forEach(card => {
+            const detailsButton = card.querySelector('.view-more-btn') || document.createElement('button');
+            if (!detailsButton.isConnected) {
+                detailsButton.className = 'view-more-btn';
+                detailsButton.type = 'button';
+                detailsButton.textContent = '⋯';
+                card.append(detailsButton);
+            }
 
+            const projectTitle = card.querySelector('.project-title')?.textContent.trim()
+                || card.dataset.title
+                || card.querySelector('.project-image').alt;
+            detailsButton.setAttribute('aria-label', `View details for ${projectTitle}`);
+
+            detailsButton.addEventListener('click', () => {
+                const category = card.querySelector('.project-category')?.textContent.trim()
+                    || card.dataset.category.replace('-', ' ');
+                const details = detailsButton.dataset.details
+                    || card.dataset.details
+                    || card.querySelector('.project-description')?.textContent.trim()
+                    || 'Project details are not available.';
+                const features = detailsButton.dataset.features ? detailsButton.dataset.features.split(';') : [];
+                const screenshots = [detailsButton.dataset.screenshot1, detailsButton.dataset.screenshot2].filter(Boolean);
+                const role = detailsButton.dataset.role || '';
+                const projectLink = detailsButton.dataset.link || '';
+
+                modalTitle.textContent = detailsButton.dataset.title || projectTitle;
+                modalLabel.textContent = detailsButton.dataset.label || category;
+                modalDetails.textContent = details;
+                const projectImage = card.querySelector('.project-image');
+                modalProjectImage.src = projectImage.src;
+                modalProjectImage.alt = projectImage.alt;
+                modalFeatures.replaceChildren(...features.map(feature => {
+                    const item = document.createElement('li');
+                    item.textContent = feature;
+                    return item;
+                }));
+                modalFeatures.classList.toggle('modal-optional-hidden', features.length === 0);
+
+                modalRole.textContent = role;
+                modalInfo.classList.toggle('modal-optional-hidden', !role);
+
+                modalGallery.classList.toggle('modal-optional-hidden', screenshots.length === 0);
+                if (screenshots[0]) modalScreenshot1.src = screenshots[0];
+                else modalScreenshot1.removeAttribute('src');
+                modalScreenshot1.alt = `${projectTitle} screenshot 1`;
+                modalScreenshot1.classList.toggle('modal-optional-hidden', !screenshots[0]);
+                if (screenshots[1]) modalScreenshot2.src = screenshots[1];
+                else modalScreenshot2.removeAttribute('src');
+                modalScreenshot2.alt = `${projectTitle} screenshot 2`;
+                modalScreenshot2.classList.toggle('modal-optional-hidden', !screenshots[1]);
+
+                modalWebsiteLink.href = projectLink || '#';
+                modalWebsiteLink.textContent = projectLink ? 'Visit website' : '';
+                modalWebsiteLink.classList.toggle('modal-optional-hidden', !projectLink);
                 modalOverlay.classList.add('show');
             });
         });
@@ -1222,6 +384,7 @@
 
         const applyFilter = (filterValue, scroll = true) => {
             let visibleCount = 0;
+            activeCarouselIndex = 0;
 
             projectCards.forEach(card => {
                 const category = card.getAttribute('data-category');
@@ -1239,6 +402,7 @@
             } else {
                 noResults.classList.remove('show');
             }
+            updateCarousel();
 
             if (scroll) {
                 document.querySelector('.portfolio-grid').scrollIntoView({ 
@@ -1263,6 +427,16 @@
         if (defaultFilter) {
             applyFilter(defaultFilter.dataset.filter, false);
         }
+
+        document.addEventListener('keydown', event => {
+            if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+            if (event.target instanceof HTMLElement && event.target.closest('button, a, input, textarea, select')) return;
+            if (modalOverlay.classList.contains('show') || photoModalOverlay.classList.contains('show')) return;
+            const visibleCount = [...projectCards].filter(card => !card.classList.contains('hidden')).length;
+            if (!visibleCount) return;
+            activeCarouselIndex = (activeCarouselIndex + (event.key === 'ArrowRight' ? 1 : -1) + visibleCount) % visibleCount;
+            updateCarousel();
+        });
         
         // Navigation
         document.querySelectorAll('.nav-item a').forEach(link => {

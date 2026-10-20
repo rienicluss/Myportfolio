@@ -6,748 +6,180 @@
 <title>Beni's Portfolio</title>
 <link rel="icon" href="myLogo.png" type="image/jpeg">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700;900&display=swap');
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-:root{
-    --primary-yellow:#FFD33D;
-    --dark:#1a1a1a;
-    --light-gray:#f5f5f5;
-    --text-gray:#666;
-    --border:#e0e0e0;
-}
-
-body{
-    font-family:'DM Sans',sans-serif;
-    background:var(--light-gray);    opacity:0;
-    transition:opacity 0.7s ease;
-}
-
-body.ready {
-    opacity:1;}
-
-/* Layout */
-.container{
-    display:flex;
-    min-height:100vh;
-    opacity:0;
-    transform: translateY(18px);
-    animation: fadeInUp 0.9s ease 0.15s forwards;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInRight {
-    from {
-        opacity: 0;
-        transform: translateX(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.sidebar{
-    width:220px;
-    background:white;
-    padding:40px 0;
-    position:fixed;
-    height:100vh;
-    border-right:1px solid var(--border);
-    display:flex;
-    flex-direction:column;
-}
-
-.logo{
-    font-family:'Playfair Display',serif;
-    font-size:28px;
-    font-weight:700;
-    letter-spacing:3px;
-    text-align:center;
-    margin-bottom:60px;
-    text-transform:uppercase;
-}
-
-.nav-menu{
-    list-style:none;
-    flex:1;
-}
-
-.nav-item{
-    margin-bottom:5px;
-}
-
-.nav-item a{
-    display:block;
-    padding:16px 40px;
-    text-decoration:none;
-    color:var(--dark);
-    font-size:14px;
-    font-weight:500;
-    text-transform:uppercase;
-    transition:0.3s;
-}
-
-.nav-item.active a{
-    background:var(--primary-yellow);
-    font-weight:700;
-}
-
-.nav-item a:hover{
-    background:rgba(255,211,61,0.3);
-    padding-left:45px;
-}
-
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: auto;
-    padding: 30px 0;
-}
-
-.social-links a {
-    width: 36px;
-    height: 36px;
-    border: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: var(--dark);
-    transition: all 0.3s ease;
-    font-size: 14px;
-}
-
-.social-links a:hover {
-    background: var(--primary-yellow);
-    border-color: var(--primary-yellow);
-    transform: translateY(-3px);
-}
-
-.copyright {
-    text-align: center;
-    font-size: 10px;
-    color: var(--text-gray);
-    letter-spacing: 1px;
-}
-
-/* Main */
-.main-content{
-    margin-left:220px;
-    flex:1;
-    padding:80px 100px;
-    transition:0.3s ease;
-}
-
-.about-title{
-    font-size:60px;
-    font-weight:700;
-    margin-bottom:20px;
-    opacity:0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.8s ease 0.2s forwards;
-}
-
-.title-divider{
-    width:100px;
-    height:5px;
-    background:var(--primary-yellow);
-    margin-bottom:40px;
-}
-
-.about-text{
-    max-width:700px;
-    margin-bottom:60px;
-    opacity:0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.8s ease 0.3s forwards;
-}
-
-.about-text p{
-    margin-bottom:20px;
-    line-height:1.8;
-    color:var(--text-gray);
-    font-size:16px;
-}
-
-.highlight-box{
-    background:white;
-    padding:30px;
-    border-left:5px solid var(--primary-yellow);
-    margin-top:30px;
-    font-style:italic;
-    font-size:16px;
-    line-height:1.6;
-}
-
-/* Skills */
-#skills h2{
-    font-size:36px;
-    margin-bottom:30px;
-    font-weight:700;
-}
-
-.skills-grid{
-    display:block;
-    gap:30px;
-}
-
-.skill-info{
-    background:white;
-    padding:30px;
-    border-radius:18px;
-    margin-bottom:24px;
-    line-height:1.8;
-    opacity:0;
-    transform: translateY(24px);
-    animation: fadeInUp 0.8s ease forwards;
-}
-
-.skills-grid .skill-info:nth-child(1){
-    animation-delay: 0.25s;
-}
-
-.skills-grid .skill-info:nth-child(2){
-    animation-delay: 0.35s;
-}
-
-.skills-grid .skill-info:nth-child(3){
-    animation-delay: 0.45s;
-}
-
-.skills-grid .skill-info:nth-child(4){
-    animation-delay: 0.55s;
-}
-
-.skill-info h3{
-    font-size:22px;
-    margin-bottom:14px;
-    font-weight:700;
-    color:var(--dark);
-}
-
-.skill-info p{
-    margin:0;
-    color:var(--text-gray);
-    font-size:16px;
-}
-
-.skill-info ul{
-    margin:14px 0 0;
-    padding-left:18px;
-    color:#444;
-}
-
-.skill-info li{
-    margin-bottom:10px;
-}
-
-.icon-bar{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:18px;
-    justify-content:center;
-}
-
-.icon-item{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:70px;
-    height:70px;
-    border-radius:14px;
-    background:white;
-    border:1px solid var(--border);
-    overflow:hidden;
-    transition:0.3s;
-}
-
-.icon-item:hover{
-    transform:scale(1.05);
-}
-
-.icon-item img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-}
-
-.icon-item i{
-    line-height:1;
-}
-
-/* HTML */
-.html-logo{
-    background:#E34C26;
-}
-
-/* CSS */
-.css-logo{
-    background:#563D7C;
-}
-
-/* JavaScript */
-.js-logo{
-    background:#F7DF1E;
-    color:#000;
-}
-
-/* React */
-.react-logo{
-    background:#61DAFB;
-    color:#000;
-}
-
-/* MySQL */
-.mysql-logo{
-    background:#00758F;
-}
-
-/* PHP */
-.php-logo{
-    background:#777BB4;
-}
-
-/* Java */
-.java-logo{
-    background:#007396;
-}
-
-/* C# */
-.csharp-logo{
-    background:#239120;
-}
-
-/* Python */
-.python-logo{
-    background:linear-gradient(135deg, #3776AB 0%, #FFD43B 100%);
-    color:#000;
-}
-
-/* Database */
-.database-logo{
-    background:#336791;
-}
-
-/* Cisco */
-.cisco-logo{
-    background:#1BA0D7;
-}
-
-/* Networking */
-.network-logo{
-    background:#FF6B35;
-}
-
-/* ================= TABLET (768px) ================= */
-
-@media(max-width:768px){
-
-    .container{
-        flex-direction:column;
-    }
-
-    .sidebar{
-        width:100%;
-        height:auto;
-        position:relative;
-        padding:25px 0;
-        border-right:none;
-        border-bottom:1px solid var(--border);
-    }
-
-    .logo{
-        font-size:24px;
-        margin-bottom:25px;
-        letter-spacing:2px;
-    }
-
-    .nav-menu{
-        display:flex;
-        justify-content:center;
-        flex-wrap:wrap;
-        gap:5px;
-    }
-
-    .nav-item{
-        margin:0;
-    }
-
-    .nav-item a{
-        padding:12px 20px;
-        font-size:13px;
-    }
-
-    .nav-item a:hover{
-        padding-left:20px;
-    }
-
-    .social-links{
-        padding:20px 0 15px;
-        gap:12px;
-    }
-
-    .social-links a{
-        width:34px;
-        height:34px;
-        font-size:13px;
-    }
-
-    .copyright{
-        font-size:9px;
-    }
-
-    .main-content{
-        margin-left:0;
-        padding:50px 40px;
-    }
-
-    .about-title{
-        font-size:48px;
-    }
-
-    .title-divider{
-        width:80px;
-        height:4px;
-        margin-bottom:30px;
-    }
-
-    .about-text{
-        max-width:100%;
-        margin-bottom:50px;
-    }
-
-    .about-text p{
-        font-size:15px;
-        line-height:1.7;
-    }
-
-    .highlight-box{
-        padding:25px;
-        font-size:15px;
-        margin-top:25px;
-    }
-
-    #skills h2{
-        font-size:32px;
-        margin-bottom:25px;
-    }
-
-    .skills-grid{
-        grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-        gap:25px;
-    }
-
-    .skill-card{
-        padding:25px;
-    }
-
-    .skill-name{
-        font-size:17px;
-    }
-}
-
-/* ================= MOBILE (480px) ================= */
-
-@media(max-width:480px){
-
-    .sidebar{
-        padding:20px 0;
-    }
-
-    .logo{
-        font-size:20px;
-        margin-bottom:20px;
-        letter-spacing:1.5px;
-    }
-
-    .nav-menu{
-        gap:3px;
-    }
-
-    .nav-item a{
-        padding:10px 15px;
-        font-size:11px;
-        letter-spacing:0.5px;
-    }
-
-    .social-links{
-        padding:15px 0 12px;
-        gap:10px;
-    }
-
-    .social-links a{
-        width:32px;
-        height:32px;
-        font-size:12px;
-    }
-
-    .copyright{
-        font-size:8px;
-        padding:0 10px;
-    }
-
-    .main-content{
-        padding:35px 20px;
-    }
-
-    .about-title{
-        font-size:36px;
-        margin-bottom:15px;
-    }
-
-    .title-divider{
-        width:60px;
-        height:4px;
-        margin-bottom:25px;
-    }
-
-    .about-text{
-        margin-bottom:40px;
-    }
-
-    .about-text p{
-        font-size:14px;
-        line-height:1.6;
-        margin-bottom:15px;
-    }
-
-    .highlight-box{
-        padding:20px;
-        font-size:14px;
-        margin-top:20px;
-        border-left-width:4px;
-    }
-
-    #skills h2{
-        font-size:28px;
-        margin-bottom:20px;
-    }
-
-    .skills-grid{
-        grid-template-columns:1fr;
-        gap:20px;
-    }
-
-    .skill-card{
-        padding:20px;
-        font-size:14px;
-    }
-
-    .skill-name{
-        font-size:16px;
-        margin-bottom:8px;
-    }
-}
-
-/* ================= EXTRA SMALL PHONES (360px and below) ================= */
-
-@media(max-width:360px){
-
-    .logo{
-        font-size:18px;
-    }
-
-    .nav-item a{
-        padding:8px 12px;
-        font-size:10px;
-    }
-
-    .main-content{
-        padding:30px 15px;
-    }
-
-    .about-title{
-        font-size:32px;
-    }
-
-    .title-divider{
-        width:50px;
-    }
-
-    .about-text p{
-        font-size:13px;
-    }
-
-    .highlight-box{
-        padding:18px;
-        font-size:13px;
-    }
-
-    #skills h2{
-        font-size:24px;
-    }
-
-    .skill-card{
-        padding:18px;
-    }
-}
-</style>
+<link rel="stylesheet" href="css/about.css">
 </head>
-
 <body>
-
 <div class="container">
+    <aside class="sidebar">
+        <ul class="nav-menu" aria-label="Main navigation">
+            <li class="nav-item"><a href="index.html">Home</a></li>
+            <li class="nav-item active"><a href="about.html" aria-current="page">About</a></li>
+            <li class="nav-item"><a href="works.html">Projects</a></li>
+            <li class="nav-item"><a href="contact.html">Contacts</a></li>
+        </ul>
+    </aside>
 
-<!-- Sidebar -->
-<aside class="sidebar">
-    <div class="logo">BeniFold's</div>
+    <main class="main-content">
+        <header class="profile-banner">
+            <div class="profile-card">
+                <div class="profile-photo">
+                    <img src="pfp.jpeg" alt="Rodolfo Bien Aboc">
+                </div>
+                <div class="profile-heading">
+                    <h2>Rodolfo Bien Aboc</h2>
+                    <p>Bachelor of Science in Information Technology</p>
+                </div>
+            </div>
+        </header>
 
-    <ul class="nav-menu">
-        <li class="nav-item">
-            <a href="index.html">Home</a>
-        </li>
-        <li class="nav-item active">
-            <a href="about.html">About Me</a>
-        </li>
-        <li class="nav-item">
-            <a href="works.html">Works</a>
-        </li>
-        <li class="nav-item">
-            <a href="contact.html">Contact</a>
-        </li>
-    </ul>
+        <div class="about-layout">
+            <div class="about-main-column">
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>
+                            I'm <strong>Rodolfo Bien Aboc</strong>, a student pursuing Network Specialization,
+                            Hardware Management, Web UI/UX Development, and Graphic Design with hands-on
+                            experience in building networks, designing systems, and creating user-friendly
+                            web applications. I enjoy working on projects that combine network infrastructure,
+                            hardware solutions, and thoughtful digital interfaces.
+                        </p>
+                        <p>
+                            I have practical experience with network design, web development, system
+                            troubleshooting, and hardware configuration. I'm fluent in Canva for creating
+                            polished presentations, social graphics, and design assets. I'm always learning
+                            and exploring new technologies to improve my skills and deliver better solutions.
+                        </p>
+                    </div>
+                    <div class="highlight-box">
+                        "If there's no risk, you can't create a future.<br>-M.D.L"
+                    </div>
+                </div>
 
-    <div class="social-links">
-        <a href="https://instagram.com/yourusername" 
-           target="_blank" 
-           rel="noopener noreferrer" 
-           aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-        </a>
+                <section id="skills">
+                    <h2>What I Do?</h2>
+                    <div class="skills-grid">
+                <div class="skill-info">
+                    <h3>UI / UX Development</h3>
+                    <p>I build responsive and user-friendly interfaces using HTML, CSS, JavaScript, and React. I also work with backend integration tools like MySQL, PHP, and XAMPP to connect visual designs with functional applications.</p>
+                    <div class="icon-bar">
+                        <span class="icon-item"><img src="Icons/icons8-html-5-100.png" alt="HTML"></span>
+                        <span class="icon-item"><img src="Icons/icons8-css-filetype-100.png" alt="CSS"></span>
+                        <span class="icon-item"><img src="Icons/icons8-javascript-100.png" alt="JavaScript"></span>
+                        <span class="icon-item"><img src="Icons/icons8-react-100.png" alt="React"></span>
+                        <span class="icon-item"><img src="Icons/icons8-php-logo-100.png" alt="PHP"></span>
+                    </div>
+                </div>
 
-        <a href="https://www.facebook.com/rodolfo.aboc/" 
-           target="_blank" 
-           rel="noopener noreferrer" 
-           aria-label="Facebook">
-            <i class="fab fa-facebook-f"></i>
-        </a>
+                <div class="skill-info">
+                    <h3>Design &amp; Presentation</h3>
+                    <p>I'm fluent in Canva for making polished presentations, social graphics, and design assets. I create visual layouts that communicate ideas clearly and support strong storytelling.</p>
+                    <div class="icon-bar">
+                        <span class="icon-item"><img src="Icons/icons8-canva-100.png" alt="Canva"></span>
+                    </div>
+                </div>
 
-        <a href="https://github.com/rienicluss" 
-           target="_blank" 
-           rel="noopener noreferrer" 
-           aria-label="GitHub">
-            <i class="fab fa-github"></i>
-        </a>
-    </div>
-    
-    <div class="copyright">
-        © 2025 BeniFold's
-    </div>
-</aside>
+                <div class="skill-info">
+                    <h3>Networking</h3>
+                    <p>I design and simulate network topologies with Cisco Packet Tracer and work with switches, routers, cabling, and connectivity setup. I enjoy combining physical networking with practical troubleshooting.</p>
+                    <!--<div class="icon-bar">
+                        <span class="icon-item"><img src="Icons/icons8-html-5-100.png" alt="Networks"></span>
+                    </div> -->
+                </div>
 
-<!-- Main Content -->
-<main class="main-content">
+                <div class="skill-info">
+                    <h3>Programming Languages</h3>
+                    <p>I have basic to intermediate experience with Java, C#, C, and Python, and I apply object-oriented programming principles to develop structured solutions and algorithms.</p>
+                    <div class="icon-bar">
+                        <span class="icon-item"><img src="Icons/icons8-java-100.png" alt="Java"></span>
+                        <span class="icon-item"><img src="Icons/icons8-c-sharp-logo-100.png" alt="C#"></span>
+                        <span class="icon-item"><img src="Icons/icons8-python-100.png" alt="Python"></span>
+                    </div>
+                </div>
+                    </div>
+                </section>
+            </div>
 
-    <h1 class="about-title">ABOUT ME</h1>
-    <div class="title-divider"></div>
+            <aside class="spotify-panel" aria-labelledby="spotify-title">
+                <button class="play-video-button" type="button" aria-haspopup="dialog" aria-controls="video-modal">
+                    <i class="fa-solid fa-play" aria-hidden="true"></i>
+                    Play Reel
+                </button>
+                <h2 id="spotify-title">Music</h2>
+                <iframe
+                    class="spotify-player"
+                    src="https://open.spotify.com/embed/playlist/7u4t4N9aqqfgyNPOmeiplp?utm_source=generator"
+                    title="Spotify playlist player"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy">
+                </iframe>
+                <a class="spotify-link" href="https://open.spotify.com/playlist/7u4t4N9aqqfgyNPOmeiplp" target="_blank" rel="noopener noreferrer">
+                    Open playlist in Spotify
+                </a>
 
-    <div class="about-text">
-        <p>
-            I'm <strong>Rodolfo Bien Aboc</strong>, a <strong>Network Specialist</strong> and <strong>Web UI/UX Developer</strong> with hands-on experience in building networks and creating web applications. I enjoy working on projects that combine network infrastructure with user-friendly digital interfaces.
-        </p>
-
-        <p>
-            I have practical experience with network design, web development, and system troubleshooting. I'm also fluent in using Canva for making presentations and designs. I'm always learning and exploring new technologies to improve my skills and deliver better solutions.
-        </p>
-
-        <div class="highlight-box">
-            "If there's no risk, you can't create a future.<br>-M.D.L"
+                <section class="photos-section" aria-labelledby="photos-title">
+                    <h2 id="photos-title">Photos</h2>
+                    <div class="photo-grid">
+                        <a class="photo-tile" href="pfp.jpeg" target="_blank" rel="noopener noreferrer" aria-label="Open profile photo">
+                            <img src="pfp.jpeg" alt="Profile photo">
+                        </a>
+                        <a class="photo-tile" href="Banner.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open sunset cover photo">
+                            <img src="Banner.jpg" alt="Sunset landscape">
+                        </a>
+                    </div>
+                </section>
+            </aside>
         </div>
-    </div>
-
-    <section id="skills">
-        <h2>What I Do</h2>
-
-        <div class="skills-grid">
-            <div class="skill-info">
-                <h3>UI / UX Development</h3>
-                <p>I build responsive and user-friendly interfaces using HTML, CSS, JavaScript, and React. I also work with backend integration tools like MySQL, PHP, and XAMPP to connect visual designs with functional applications.</p>
-                <div class="icon-bar">
-                    <span class="icon-item"><img src="Icons/icons8-html-5-100.png" alt="HTML"></span>
-                    <span class="icon-item"><img src="Icons/icons8-css-filetype-100.png" alt="CSS"></span>
-                    <span class="icon-item"><img src="Icons/icons8-javascript-100.png" alt="JavaScript"></span>
-                    <span class="icon-item"><img src="Icons/icons8-react-100.png" alt="React"></span>
-                    <span class="icon-item"><img src="Icons/icons8-php-logo-100.png" alt="PHP"></span>
-                </div>
-            </div>
-
-            <div class="skill-info">
-                <h3>Design & Presentation</h3>
-                <p>I'm fluent in Canva for making polished presentations, social graphics, and design assets. I create visual layouts that communicate ideas clearly and support strong storytelling.</p>
-                <div class="icon-bar">
-                    <span class="icon-item"><img src="Icons/icons8-canva-100.png" alt="Canva"></span>
-                </div>
-            </div>
-
-            <div class="skill-info">
-                <h3>Networking</h3>
-                <p>I design and simulate network topologies with Cisco Packet Tracer and work with switches, routers, cabling, and connectivity setup. I enjoy combining physical networking with practical troubleshooting.</p>
-                <div class="icon-bar">
-                    <span class="icon-item"><img src="Icons/icons8-html-5-100.png" alt="Networks"></span>
-                </div>
-            </div>
-
-            <div class="skill-info">
-                <h3>Programming Languages</h3>
-                <p>I have basic to intermediate experience with Java, C#, C, and Python, and I apply object-oriented programming principles to develop structured solutions and algorithms.</p>
-                <div class="icon-bar">
-                    <span class="icon-item"><img src="Icons/icons8-java-100.png" alt="Java"></span>
-                    <span class="icon-item"><img src="Icons/icons8-c-sharp-logo-100.png" alt="C#"></span>
-                    <span class="icon-item"><img src="Icons/icons8-python-100.png" alt="Python"></span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-</main>
+    </main>
 </div>
 
+<dialog class="video-modal" id="video-modal" aria-label="Reel video player">
+    <div class="video-modal-content">
+        <button class="video-modal-close" type="button" aria-label="Close video">×</button>
+        <video class="modal-video" controls playsinline preload="metadata">
+            <source src="bidyo.mp4" type="video/mp4">
+            Your browser does not support HTML video.
+        </video>
+    </div>
+</dialog>
+
 <script>
-window.addEventListener('DOMContentLoaded', () => document.body.classList.add('ready'));
-// Allow real page navigation
-document.querySelectorAll('.nav-item a').forEach(link=>{
-    link.addEventListener('click',function(e){
-        const href=this.getAttribute('href');
+window.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('ready');
 
-        if(href.startsWith("#")){
-            e.preventDefault();
+    const playButton = document.querySelector('.play-video-button');
+    const videoModal = document.querySelector('#video-modal');
+    const video = videoModal.querySelector('video');
+    const closeButton = videoModal.querySelector('.video-modal-close');
 
-            document.querySelectorAll('.nav-item')
-            .forEach(item=>item.classList.remove('active'));
+    playButton.addEventListener('click', () => {
+        videoModal.showModal();
+        video.play().then(() => {
+            if (!videoModal.open) {
+                video.pause();
+                video.currentTime = 0;
+            }
+        }).catch(error => {
+            if (error.name === 'AbortError' && !videoModal.open) return;
+            console.error('Unable to play the reel video:', error);
+        });
+    });
 
-            this.parentElement.classList.add('active');
-
-            document.querySelector('.main-content')
-            .style.opacity='0';
-
-            setTimeout(()=>{
-                document.querySelector('.main-content')
-                .style.opacity='1';
-            },300);
+    closeButton.addEventListener('click', () => {
+        video.pause();
+        videoModal.close();
+    });
+    videoModal.addEventListener('click', event => {
+        if (event.target === videoModal) {
+            video.pause();
+            videoModal.close();
         }
+    });
+    videoModal.addEventListener('close', () => {
+        video.pause();
+        video.currentTime = 0;
+        playButton.focus();
     });
 });
 </script>
-
 </body>
 </html>
